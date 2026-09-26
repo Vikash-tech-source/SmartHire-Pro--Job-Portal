@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SmartHire - Intelligent Job Portal & Recruitment Management</title>
+<link rel="icon" type="image/jpeg" href="assets/logo.jpg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark-img">
+        <img src="assets/logo.jpg" alt="SmartHire Logo" class="logo-img"/>
+        <div class="logo-glow"></div>
+      </div>
+      <div class="brand-text">
+        <strong>SmartHire</strong>
+        <span>Unified Portal System</span>
+      </div>
+    </div>
+
+    <div class="role-indicator-badge">
+      <small>CURRENT WORKSPACE</small>
+      <div id="sidebarRoleLabel" class="role-current-tag">🎓 Candidate Portal</div>
+    </div>
+
+    <!-- Seeker Navigation -->
+    <nav id="nav-seeker" class="nav-group">
+      <div class="nav-section-title">CANDIDATE MENU</div>
+      <button class="nav-item active" data-page="dashboard"><span>⌂</span> Dashboard</button>
+      <button class="nav-item" data-page="jobs"><span>⌕</span> Find Jobs</button>
+      <button class="nav-item" data-page="resume"><span>📄</span> AI Resume & ATS</button>
+      <button class="nav-item" data-page="saved"><span>♡</span> Saved Jobs</button>
+      <button class="nav-item" data-page="applications"><span>✓</span> Applications</button>
+      <button class="nav-item" data-page="profile"><span>◉</span> My Profile</button>
+    </nav>
+
+    <!-- Recruiter Navigation -->
+    <nav id="nav-recruiter" class="nav-group hidden">
+      <div class="nav-section-title">RECRUITER SUITE</div>
+      <button class="nav-item active" data-page="recruiter"><span>📊</span> Recruiter Overview</button>
+      <button class="nav-item" data-page="recruiter-applicants"><span>👥</span> Applicant Tracking</button>
+      <button class="nav-item" data-page="recruiter-jobs"><span>💼</span> Manage Postings</button>
+      <button class="nav-item" id="sidebarPostJobBtn"><span>➕</span> Post New Job</button>
+    </nav>
+
+    <!-- Admin Navigation -->
+    <nav id="nav-admin" class="nav-group hidden">
+      <div class="nav-section-title">ADMIN GOVERNANCE</div>
+      <button class="nav-item active" data-page="admin"><span>🛡️</span> Platform Overview</button>
+      <button class="nav-item" data-page="admin-moderation"><span>⚖️</span> Job & User Audit</button>
+      <button class="nav-item" data-page="admin-logs"><span>📋</span> System Activity</button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="tip-box" id="sidebarTipBox">
+        <div class="tip-icon" id="sidebarTipIcon">✦</div>
+        <div>
+          <b id="sidebarTipTitle">Smart Match</b>
+          <p id="sidebarTipDesc">Complete your profile to improve job recommendations.</p>
+        </div>
+      </div>
+      <div class="sidebar-user">
+        <div class="avatar" id="sidebarAvatar">V</div>
+        <div>
+          <b id="sidebarUserName">Vikash Mishra</b>
+          <small id="sidebarUserRole">Job Seeker</small>
+        </div>
+        <span class="user-status-dot online" title="Online">●</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="mobile-brand">
+        <div class="brand-mark-img brand-mark-img--sm">
+          <img src="assets/logo.jpg" alt="SmartHire Logo" class="logo-img"/>
+        </div>
+        <b>SmartHire</b>
+      </div>
+
+      <!-- Live Role Switcher -->
+      <div class="role-switcher-container">
+        <span class="role-switch-title">Select Portal Role:</span>
+        <div class="role-pills" id="rolePillGroup">
+          <button class="role-pill active" data-role="seeker">
+            <span class="role-badge-icon">🎓</span>
+            <span class="role-name">Candidate</span>
+          </button>
+          <button class="role-pill" data-role="recruiter">
+            <span class="role-badge-icon">💼</span>
+            <span class="role-name">Recruiter (HR)</span>
+          </button>
+          <button class="role-pill" data-role="admin">
+            <span class="role-badge-icon">🛡️</span>
+            <span class="role-name">Admin Control</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button class="icon-btn" title="Live System Notifications" id="notificationBtn">
+          🔔<i></i>
+        </button>
+        <div class="top-avatar" id="topAvatar">V</div>
+      </div>
+    </header>
+
+    <!-- ==================== 1. CANDIDATE PAGES ==================== -->
+
+    <!-- Dashboard -->
+    <section id="page-dashboard" class="page active-page">
+      <div class="hero-card">
+        <div>
+          <span class="eyebrow">GOOD EVENING, VIKASH</span>
+          <h1>Build your next career move.</h1>
+          <p>Discover jobs matched to your skills, education and preferred location.</p>
+          <div class="hero-search">
+            <input id="heroSearch" placeholder="Search job title, skill or company"/>
+            <button id="heroSearchBtn">Search Jobs →</button>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="orb o1"></div>
+          <div class="orb o2"></div>
+          <div class="floating-card">
+            <small>Profile Match</small>
+            <strong>86%</strong>
+            <div class="progress"><span style="width:86%"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-icon purple">⌕</div>
+          <div>
+            <small>Available Jobs</small>
+            <b id="dashTotalJobs">1,248</b>
+            <span class="up">+12% this week</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon blue">✦</div>
+          <div>
+            <small>Recommended</small>
+            <b>24</b>
+            <span>high match jobs</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon green">✓</div>
+          <div>
+            <small>Applications</small>
+            <b id="dashApplicationsCount">8</b>
+            <span>2 interviews</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <div>
+          <h2>Recommended for you</h2>
+          <p>Based on your skills: HTML, CSS, JavaScript, Communication</p>
+        </div>
+        <button class="link-btn" data-page-link="jobs">View all →</button>
+      </div>
+      <div id="recommendedGrid" class="job-grid"></div>
+    </section>
+
+    <!-- Find Jobs -->
+    <section id="page-jobs" class="page">
+      <div class="page-title">
+        <div>
+          <span class="eyebrow">OPPORTUNITIES</span>
+          <h1>Find your next job</h1>
+          <p>Search, filter and compare openings in one place.</p>
+        </div>
+        <span class="result-pill" id="resultCount">0 jobs</span>
+      </div>
+
+      <div class="filter-panel">
+        <div class="search-field">
+          <span>⌕</span>
+          <input id="jobSearch" placeholder="Job title, skill or company"/>
+        </div>
+        <select id="locationFilter">
+          <option value="">All locations</option>
+          <option>Dehradun</option>
+          <option>Delhi NCR</option>
+          <option>Noida</option>
+          <option>New Delhi</option>
+          <option>Hyderabad</option>
+          <option>Bengaluru</option>
+          <option>Remote</option>
+        </select>
+        <select id="typeFilter">
+          <option value="">All job types</option>
+          <option>Full-time</option>
+          <option>Internship</option>
+          <option>Part-time</option>
+        </select>
+        <select id="sortFilter">
+          <option value="relevance">Most relevant</option>
+          <option value="latest">Latest</option>
+          <option value="salary">Highest salary</option>
+        </select>
+        <button id="clearFilters" class="ghost-btn">Reset</button>
+      </div>
+
+      <div id="jobGrid" class="job-grid"></div>
+    </section>
+
+    <!-- ==================== AI RESUME & ATS CHECKER ==================== -->
+    <section id="page-resume" class="page">
+      <div class="hero-card resume-hero">
+        <div>
+          <span class="eyebrow">AI RESUME OPTIMIZER · ATS ANALYZER</span>
+          <h1>Check Your Resume ATS Score</h1>
+          <p>Scan your resume against modern Applicant Tracking Systems (Taleo, Workday, Greenhouse). Get keyword density metrics, format compatibility checks, and verified ATS templates.</p>
+          <div class="admin-badges-row">
+            <span class="sys-badge status-good">✓ 2026 ATS Parser Compliant</span>
+            <span class="sys-badge status-info">⚡ Keyword Density Match</span>
+            <span class="sys-badge status-good">★ High-Scoring Templates</span>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="floating-card ats-floating-score">
+            <small>Current ATS Score</small>
+            <strong id="heroAtsScoreDisplay">84%</strong>
+            <div class="progress"><span id="heroAtsProgressBar" style="width:84%;background:#10b981"></span></div>
+            <small id="heroAtsStatusTag" style="margin-top:6px;display:block;color:#10b981;">▲ Strong Candidate Match</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input & Controls Card -->
+      <div class="table-card" style="margin-top:20px;">
+        <div class="card-head">
+          <div>
+            <h3>1. Select Target Job & Input Resume</h3>
+            <p>Compare your resume keywords against live employer expectations.</p>
+          </div>
+          <div class="btn-action-group">
+            <button class="btn-sm btn-outline" id="loadDemoResumeBtn">📋 Load Vikash's Resume</button>
+            <button class="btn-sm btn-outline" id="loadLowScoreResumeBtn">⚠️ Load Low-Score Resume</button>
+            <label class="btn-sm btn-outline" style="cursor:pointer;margin:0;">
+              📁 Upload File (.txt)
+              <input type="file" id="resumeFileInput" accept=".txt,.doc,.docx,.pdf" style="display:none;"/>
+            </label>
+            <button class="btn-sm btn-outline" id="clearResumeTextBtn">🧹 Clear</button>
+          </div>
+        </div>
+
+        <div class="filter-panel" style="grid-template-columns:1fr 1fr;margin-bottom:12px;">
+          <div class="form-group">
+            <label style="font-size:11px;font-weight:700;color:#334155;margin-bottom:4px;">Target Job Opening</label>
+            <select id="atsTargetJobSelect" style="border:1px solid #d1d5db;border-radius:8px;padding:9px 12px;height:42px;">
+              <option value="1">Junior Web Developer (Aarsh Technologies)</option>
+              <option value="4">Frontend Developer (PixelCraft Labs)</option>
+              <option value="3">IT Support Intern (TechNova Systems)</option>
+              <option value="2">Customer Support Executive (Concentrix)</option>
+              <option value="5">HR Recruiter Trainee (Aarsh Technologies)</option>
+              <option value="6">Data Operations Associate (InnovaServe)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="font-size:11px;font-weight:700;color:#334155;margin-bottom:4px;">Parser Standard</label>
+            <select id="atsParserStandard" style="border:1px solid #d1d5db;border-radius:8px;padding:9px 12px;height:42px;">
+              <option>Enterprise Standard (Workday / Taleo)</option>
+              <option>Tech Startup Standard (Greenhouse / Lever)</option>
+              <option>Government & Public Sector Format</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top:10px;">
+          <label style="font-size:11px;font-weight:700;color:#334155;">Resume Content (Plain Text)</label>
+          <textarea id="resumeInputText" rows="9" placeholder="Paste your resume text here, or click 'Load Vikash's Resume' above to test immediately..." style="width:100%;border:1px solid #d1d5db;border-radius:10px;padding:12px;font-family:monospace;font-size:11.5px;line-height:1.5;outline:none;background:#fafbfc;"></textarea>
+        </div>
+
+        <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;">
+          <small style="color:#64748b;">Word count: <b id="resumeWordCount">0</b> words</small>
+          <button class="primary-btn btn-highlight" id="scanResumeBtn" style="padding:12px 24px;font-size:13px;">⚡ Run AI ATS Scan</button>
+        </div>
+      </div>
+
+      <!-- Live ATS Results Dashboard -->
+      <div id="atsResultsDashboard" style="margin-top:24px;">
+        <div class="section-head">
+          <div>
+            <h2>2. ATS Scan Results & Diagnostic Report</h2>
+            <p>Comprehensive evaluation of keyword density, layout compliance, and hiring odds.</p>
+          </div>
+          <span class="badge-status status-approved" id="atsStatusBadge">Scored for: Junior Web Developer</span>
+        </div>
+
+        <!-- Score Breakdown Cards -->
+        <div class="stats-grid stats-four">
+          <div class="stat" style="border-left:4px solid #6366f1;">
+            <div class="score-ring" id="atsCircleScoreRing" style="width:68px;height:68px;font-size:18px;">84<small>%</small></div>
+            <div>
+              <small>Overall ATS Score</small>
+              <b id="atsOverallScoreText" style="font-size:20px;color:#4f46e5;">84 / 100</b>
+              <span class="up" id="atsPassTag">High Pass Rate</span>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon purple">🔑</div>
+            <div>
+              <small>Keyword Alignment</small>
+              <b id="atsKeywordScoreText">85%</b>
+              <span id="atsKeywordCountText">8 of 10 matched</span>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon green">📐</div>
+            <div>
+              <small>Format & Structure</small>
+              <b id="atsFormatScoreText">92%</b>
+              <span>Single-column clean</span>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon orange">🎯</div>
+            <div>
+              <small>Action Verbs & Impact</small>
+              <b id="atsImpactScoreText">74%</b>
+              <span>Good active phrasing</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Keyword Match Breakdown & Missing Keywords -->
+        <div class="admin-dashboard-split" style="margin-top:16px;">
+          <!-- Left: Keywords Analysis -->
+          <div class="table-card">
+            <div class="card-head">
+              <div>
+                <h3>Keyword Analysis vs Target Job</h3>
+                <p>Keywords extracted by the ATS scanner.</p>
+              </div>
+            </div>
+            
+            <div style="margin-bottom:14px;">
+              <small style="display:block;font-weight:700;color:#15803d;margin-bottom:6px;">✓ Matched High-Frequency Keywords:</small>
+              <div class="chips" id="atsMatchedKeywordsContainer" style="gap:6px;">
+                <!-- Dynamically filled -->
+              </div>
+            </div>
+
+            <div style="margin-top:16px;">
+              <small style="display:block;font-weight:700;color:#b91c1c;margin-bottom:6px;">⚠️ Missing Critical Keywords (Add these to boost score):</small>
+              <div class="chips" id="atsMissingKeywordsContainer" style="gap:6px;">
+                <!-- Dynamically filled -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Actionable Recommendations -->
+          <div class="table-card">
+            <div class="card-head">
+              <div>
+                <h3>ATS Recommendations & Fixes</h3>
+                <p>Prioritized items to guarantee ATS passing.</p>
+              </div>
+            </div>
+            <div class="audit-stream" id="atsRecommendationsList">
+              <!-- Dynamically filled -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Suggested ATS-Friendly Templates Section -->
+      <div id="atsTemplatesSection" style="margin-top:30px;">
+        <div class="section-head">
+          <div>
+            <h2>3. Recommended ATS-Friendly Resume Templates</h2>
+            <p>If your resume scored low or needs improvement, use these verified, 100% parser-safe templates.</p>
+          </div>
+          <span class="result-pill">98% Avg. ATS Pass Rate</span>
+        </div>
+
+        <div class="template-warning-banner" id="templateSuggestionBanner">
+          <div style="font-size:22px;">💡</div>
+          <div>
+            <b id="templateBannerTitle">Need a higher ATS score?</b>
+            <p id="templateBannerDesc">These templates use single-column hierarchy, standard headings, and UTF-8 safe bullet points tested on Taleo and Workday.</p>
+          </div>
+        </div>
+
+        <div class="job-grid" style="margin-top:16px;">
+          <!-- Template 1 -->
+          <div class="job-card template-card">
+            <div class="company-row">
+              <div class="company-logo logo-a">📄</div>
+              <div>
+                <b>TechPro Minimalist</b>
+                <div class="company-name">Engineering & Web Development</div>
+              </div>
+            </div>
+            <div style="margin:12px 0 8px;">
+              <span class="badge-status status-approved">98% ATS Pass Rate</span>
+            </div>
+            <p style="font-size:11px;color:#64748b;line-height:1.5;">Single-column clean hierarchy, skill matrix at top, quantifiable project bullet points. 100% immune to parser corruption.</p>
+            <div class="job-meta">
+              <span class="tag">Zero Tables</span>
+              <span class="tag">Standard Headings</span>
+              <span class="tag">FastScan Safe</span>
+            </div>
+            <div class="job-bottom" style="margin-top:18px;">
+              <button class="mini-btn" data-preview-template="techpro">👁️ Preview Template</button>
+              <button class="mini-btn save-btn" data-use-template="techpro">📋 Copy Template</button>
+            </div>
+          </div>
+
+          <!-- Template 2 -->
+          <div class="job-card template-card">
+            <div class="company-row">
+              <div class="company-logo logo-b">🎓</div>
+              <div>
+                <b>Fresher FastTrack</b>
+                <div class="company-name">Students & Recent Graduates</div>
+              </div>
+            </div>
+            <div style="margin:12px 0 8px;">
+              <span class="badge-status status-approved">96% ATS Pass Rate</span>
+            </div>
+            <p style="font-size:11px;color:#64748b;line-height:1.5;">Puts education, key coursework, academic projects, and verified certifications first. Perfect for freshers with no prior work history.</p>
+            <div class="job-meta">
+              <span class="tag">Education First</span>
+              <span class="tag">Project Focused</span>
+              <span class="tag">Keywords Dense</span>
+            </div>
+            <div class="job-bottom" style="margin-top:18px;">
+              <button class="mini-btn" data-preview-template="fresher">👁️ Preview Template</button>
+              <button class="mini-btn save-btn" data-use-template="fresher">📋 Copy Template</button>
+            </div>
+          </div>
+
+          <!-- Template 3 -->
+          <div class="job-card template-card">
+            <div class="company-row">
+              <div class="company-logo logo-c">💼</div>
+              <div>
+                <b>Modern Executive</b>
+                <div class="company-name">Operations, Support & Management</div>
+              </div>
+            </div>
+            <div style="margin:12px 0 8px;">
+              <span class="badge-status status-approved">95% ATS Pass Rate</span>
+            </div>
+            <p style="font-size:11px;color:#64748b;line-height:1.5;">Balanced executive summary, core competencies grid, chronologically sorted work achievements with quantifiable metrics.</p>
+            <div class="job-meta">
+              <span class="tag">Impact Bullets</span>
+              <span class="tag">Core Competencies</span>
+              <span class="tag">Classic Layout</span>
+            </div>
+            <div class="job-bottom" style="margin-top:18px;">
+              <button class="mini-btn" data-preview-template="executive">👁️ Preview Template</button>
+              <button class="mini-btn save-btn" data-use-template="executive">📋 Copy Template</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Saved Jobs -->
+    <section id="page-saved" class="page">
+      <div class="page-title">
+        <div>
+          <span class="eyebrow">YOUR SHORTLIST</span>
+          <h1>Saved Jobs</h1>
+          <p>Keep your best opportunities within reach.</p>
+        </div>
+      </div>
+      <div id="savedGrid" class="job-grid"></div>
+    </section>
+
+    <!-- Applications Tracker -->
+    <section id="page-applications" class="page">
+      <div class="page-title">
+        <div>
+          <span class="eyebrow">APPLICATION TRACKER</span>
+          <h1>My Applications</h1>
+          <p>Track every application from submission to interview.</p>
+        </div>
+      </div>
+      <div class="timeline" id="applicationTimeline"></div>
+    </section>
+
+    <!-- Candidate Profile -->
+    <section id="page-profile" class="page">
+      <div class="page-title">
+        <div>
+          <span class="eyebrow">PROFILE</span>
+          <h1>My Profile</h1>
+          <p>Keep your profile updated for smarter recommendations.</p>
+        </div>
+      </div>
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="big-avatar">V</div>
+          <div>
+            <h2>Vikash Kumar Mishra</h2>
+            <p>B.Sc. IT Student · Dehradun</p>
+            <div class="chips">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>MS Office</span>
+              <span>Communication</span>
+            </div>
+          </div>
+          <button class="primary-btn" id="editProfileBtn">Edit Profile</button>
+        </div>
+        <div class="profile-body">
+          <div>
+            <h3>Career Preferences</h3>
+            <div class="pref-grid">
+              <div>
+                <small>Preferred roles</small>
+                <b>Web Developer, Customer Support</b>
+              </div>
+              <div>
+                <small>Preferred locations</small>
+                <b>Dehradun, Delhi NCR, Remote</b>
+              </div>
+              <div>
+                <small>Experience</small>
+                <b>Fresher</b>
+              </div>
+              <div>
+                <small>Job type</small>
+                <b>Full-time / Internship</b>
+              </div>
+            </div>
+          </div>
+          <div class="profile-score">
+            <div class="score-ring">86<small>%</small></div>
+            <b>Profile strength</b>
+            <span>Add projects & certifications to reach 100%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 2. RECRUITER PAGES ==================== -->
+
+    <!-- Recruiter Dashboard Overview -->
+    <section id="page-recruiter" class="page">
+      <div class="hero-card recruiter-hero">
+        <div>
+          <span class="eyebrow">TALENT ACQUISITION · AARSH TECHNOLOGIES</span>
+          <h1>Recruiter Control Hub</h1>
+          <p>Manage candidate pipelines, publish verified job vacancies, and schedule interviews.</p>
+          <div class="recruiter-quick-actions">
+            <button class="primary-btn btn-highlight" id="openPostJobModalBtn">➕ Post New Job</button>
+            <button class="ghost-btn-light" data-page-link="recruiter-applicants">Review Candidates (142)</button>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="floating-card recruiter-floating">
+            <small>Interview Conversion</small>
+            <strong>28.4%</strong>
+            <div class="progress"><span style="width:72%;background:#10b981"></span></div>
+            <small style="margin-top:6px;display:block;color:#10b981;">▲ +4.2% higher this month</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recruiter KPI Stats -->
+      <div class="stats-grid stats-four">
+        <div class="stat">
+          <div class="stat-icon purple">💼</div>
+          <div>
+            <small>Active Postings</small>
+            <b id="recActiveJobsCount">6</b>
+            <span class="up">All positions verified</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon blue">👥</div>
+          <div>
+            <small>Total Candidates</small>
+            <b id="recTotalApplicantsCount">142</b>
+            <span class="up">+18 today</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon green">★</div>
+          <div>
+            <small>Shortlisted</small>
+            <b id="recShortlistedCount">38</b>
+            <span>Ready for interview</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon orange">📅</div>
+          <div>
+            <small>Interviews Scheduled</small>
+            <b id="recInterviewsCount">12</b>
+            <span>4 rounds today</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Recent Applicants Preview -->
+      <div class="dashboard-block">
+        <div class="section-head">
+          <div>
+            <h2>Recent Candidate Applications</h2>
+            <p>Screen profiles with AI Match Score & perform one-click hiring actions.</p>
+          </div>
+          <button class="link-btn" data-page-link="recruiter-applicants">Open Full Pipeline →</button>
+        </div>
+        <div class="table-card">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Candidate</th>
+                  <th>Applied Position</th>
+                  <th>Match</th>
+                  <th>Key Skills</th>
+                  <th>Applied On</th>
+                  <th>Status</th>
+                  <th>Quick Action</th>
+                </tr>
+              </thead>
+              <tbody id="recruiterRecentTableBody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Postings Overview -->
+      <div class="dashboard-block" style="margin-top:24px;">
+        <div class="section-head">
+          <div>
+            <h2>Your Company Openings</h2>
+            <p>Active positions open for candidate applications.</p>
+          </div>
+          <button class="primary-btn btn-sm" id="recruiterAddJobBtn2">+ Create Listing</button>
+        </div>
+        <div class="recruiter-postings-grid" id="recruiterMiniPostingsGrid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Recruiter Full Applicant Tracking System (ATS) -->
+    <section id="page-recruiter-applicants" class="page">
+      <div class="page-title">
+        <div>
+          <span class="eyebrow">TALENT PIPELINE</span>
+          <h1>Candidate Applicant Tracker</h1>
+          <p>Review, filter, shortlist, schedule interviews, or extend job offers.</p>
+        </div>
+        <div class="header-action-group">
+          <span class="result-pill" id="recApplicantPillCount">142 Candidates</span>
+        </div>
+      </div>
+
+      <div class="filter-panel recruiter-filters">
+        <div class="search-field">
+          <span>⌕</span>
+          <input id="candidateSearchInput" placeholder="Search applicant by name, skills or role..."/>
+        </div>
+        <select id="candidateJobFilter">
+          <option value="">All Job Roles</option>
+          <option>Junior Web Developer</option>
+          <option>IT Support Intern</option>
+          <option>Customer Support Executive</option>
+          <option>Frontend Developer</option>
+          <option>HR Recruiter Trainee</option>
+          <option>Data Operations Associate</option>
+        </select>
+        <select id="candidateStatusFilter">
+          <option value="">All Pipeline Stages</option>
+          <option value="Under review">Under Review</option>
+          <option value="Shortlisted">Shortlisted</option>
+          <option value="Interview scheduled">Interview Scheduled</option>
+          <option value="Hired">Hired</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+        <button id="resetCandidateFilters" class="ghost-btn">Reset</button>
+      </div>
+
+      <div class="table-card">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Candidate Profile</th>
+                <th>Role & Location</th>
+                <th>Match Score</th>
+                <th>Experience & Education</th>
+                <th>Status</th>
+                <th>Actions & Decisions</th>
+              </tr>
+            </thead>
+            <tbody id="fullCandidateTableBody">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recruiter Manage Job Postings -->
+    <section id="page-recruiter-jobs" class="page">
+      <div class="page-title">
+        <div>
+          <span class="eyebrow">VACANCY MANAGEMENT</span>
+          <h1>My Job Postings</h1>
+          <p>Manage, toggle status, and inspect applicants for each position.</p>
+        </div>
+        <button class="primary-btn" id="openPostJobModalBtn2">➕ Post New Job</button>
+      </div>
+
+      <div class="job-grid" id="recruiterJobManagementGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ==================== 3. ADMIN PAGES ==================== -->
+
+    <!-- Admin Platform Overview -->
+    <section id="page-admin" class="page">
+      <div class="hero-card admin-hero">
+        <div>
+          <span class="eyebrow">SYSTEM GOVERNANCE · ADMIN PANEL</span>
+          <h1>SmartHire Command Center</h1>
+          <p>High-level platform telemetry, job listings audit, recruiter credentials verification & system health.</p>
+          <div class="admin-badges-row">
+            <span class="sys-badge status-good">● API Gateway: Healthy</span>
+            <span class="sys-badge status-good">● AI Match Engine: Operational</span>
+            <span class="sys-badge status-info">⚡ Active Sessions: 184</span>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="floating-card admin-floating">
+            <small>Platform Uptime</small>
+            <strong>99.98%</strong>
+            <div class="progress"><span style="width:99%;background:#38bdf8"></span></div>
+            <small style="margin-top:6px;display:block;color:#38bdf8;">Zero security incidents</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Platform Metrics -->
+      <div class="stats-grid stats-four">
+        <div class="stat">
+          <div class="stat-icon blue">👤</div>
+          <div>
+            <small>Registered Candidates</small>
+            <b>3,950</b>
+            <span class="up">+142 this week</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon purple">🏢</div>
+          <div>
+            <small>Recruiters & Companies</small>
+            <b>180</b>
+            <span class="up">12 awaiting audit</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon green">📄</div>
+          <div>
+            <small>Active Job Listings</small>
+            <b id="adminTotalJobsCount">1,248</b>
+            <span>99.2% verified</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon orange">✓</div>
+          <div>
+            <small>Applications Processed</small>
+            <b>14,920</b>
+            <span>Smart Match active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Moderation & Review Split -->
+      <div class="admin-dashboard-split">
+        <!-- Left: Job Listings Moderation Preview -->
+        <div class="table-card">
+          <div class="card-head">
+            <div>
+              <h3>Job Vacancy Moderation</h3>
+              <p>Approve or flag postings before live indexation.</p>
+            </div>
+            <button class="link-btn" data-page-link="admin-moderation">View All Moderation →</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Job Title & Company</th>
+                  <th>Type / Salary</th>
+                  <th>Moderation Status</th>
+                  <th>Admin Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminJobModerationTable">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Right: Registered Companies Verification -->
+        <div class="table-card">
+          <div class="card-head">
+            <div>
+              <h3>Employer Verification</h3>
+              <p>Corporate accounts KYC and status.</p>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Company</th>
+                  <th>Location</th>
+                  <th>Verification</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminCompanyTable">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Audit Log Stream -->
+      <div class="dashboard-block" style="margin-top:24px;">
+        <div class="section-head">
+          <div>
+            <h2>Real-Time System Audit Log</h2>
+            <p>Track job creation, role switches, approvals, and security events.</p>
+          </div>
+          <button class="link-btn" data-page-link="admin-logs">Full Audit Trail →</button>
+        </div>
+        <div class="audit-stream" id="adminAuditStreamMini">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin Moderation Full Page -->
+    <section id="page-admin-moderation" class="page">
+      <div class="page-title">
+        <div>
+          <span class="eyebrow">AUDIT & COMPLIANCE</span>
+          <h1>Job & Employer Moderation</h1>
+          <p>Enforce trust, remove non-compliant listings, and approve verified employers.</p>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="card-head">
+          <h3>All Platform Job Listings</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Location & Salary</th>
+                <th>Skills Required</th>
+                <th>Approval Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminFullModerationTable">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin System Logs -->
+    <section id="page-admin-logs" class="page">
+      <div class="page-title">
+        <div>
+          <span class="eyebrow">SECURITY & TELEMETRY</span>
+          <h1>System Activity & Audit Logs</h1>
+          <p>Chronological record of user interactions, logins, and API transactions.</p>
+        </div>
+        <button class="ghost-btn" id="clearLogsBtn">Refresh Log Feed</button>
+      </div>
+
+      <div class="table-card">
+        <div class="audit-stream full-stream" id="adminAuditStreamFull">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ==================== MODALS ==================== -->
+
+<!-- Job Detail Modal (Candidate) -->
+<div id="jobModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" id="jobModalCloseBtn">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- Post New Job Modal (Recruiter) -->
+<div id="postJobModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box modal-box-large">
+    <button class="modal-close" id="postJobCloseBtn">×</button>
+    <div class="modal-header-styled">
+      <div class="company-logo logo-a">➕</div>
+      <div>
+        <h2>Post New Job Opportunity</h2>
+        <p class="modal-sub">Publish directly to thousands of matched candidates instantly.</p>
+      </div>
+    </div>
+
+    <form id="postJobForm" class="modal-form">
+      <div class="form-row form-grid-2">
+        <div class="form-group">
+          <label>Job Title *</label>
+          <input type="text" id="postTitle" required placeholder="e.g. Frontend React Developer"/>
+        </div>
+        <div class="form-group">
+          <label>Hiring Company</label>
+          <input type="text" id="postCompany" value="Aarsh Technologies" required/>
+        </div>
+      </div>
+
+      <div class="form-row form-grid-3">
+        <div class="form-group">
+          <label>Location *</label>
+          <select id="postLocation">
+            <option>Noida</option>
+            <option>New Delhi</option>
+            <option>Dehradun</option>
+            <option>Bengaluru</option>
+            <option>Hyderabad</option>
+            <option>Remote</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Job Type *</label>
+          <select id="postType">
+            <option>Full-time</option>
+            <option>Internship</option>
+            <option>Part-time</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Salary Package *</label>
+          <input type="text" id="postSalary" required placeholder="e.g. ₹5 - 7.5 LPA"/>
+        </div>
+      </div>
+
+      <div class="form-row form-grid-2">
+        <div class="form-group">
+          <label>Experience Level</label>
+          <select id="postExperience">
+            <option>Fresher</option>
+            <option>0-1 year</option>
+            <option>1-3 years</option>
+            <option>3+ years</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Key Skills Required (comma-separated) *</label>
+          <input type="text" id="postSkills" required placeholder="React, JavaScript, CSS, REST APIs"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Job Overview & Description *</label>
+        <textarea id="postDesc" rows="3" required placeholder="Describe the role, team, and day-to-day challenges..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Key Responsibilities (one per line)</label>
+        <textarea id="postResponsibilities" rows="3" placeholder="Develop clean front-end components&#10;Collaborate with product designer&#10;Optimize web performance"></textarea>
+      </div>
+
+      <div class="modal-footer-actions">
+        <button type="button" class="ghost-btn" id="cancelPostJobBtn">Cancel</button>
+        <button type="submit" class="primary-btn">Publish Job Opening →</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Candidate Details & Resume Modal (Recruiter / Admin) -->
+<div id="applicantModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" id="applicantModalCloseBtn">×</button>
+    <div id="applicantModalContent"></div>
+  </div>
+</div>
+
+<!-- ATS Resume Template Preview Modal -->
+<div id="templateModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box modal-box-large">
+    <button class="modal-close" id="templateModalCloseBtn">×</button>
+    <div class="modal-header-styled">
+      <div class="company-logo logo-a" id="templateModalLogo">📄</div>
+      <div>
+        <h2 id="templateModalTitle">ATS-Optimized Resume Template</h2>
+        <p class="modal-sub" id="templateModalSub">100% Parser Compliant Single-Column Format</p>
+      </div>
+    </div>
+    <div id="templateModalPreviewContent" class="template-preview-wrapper" style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:24px;font-family:Inter,Arial,sans-serif;line-height:1.5;max-height:55vh;overflow-y:auto;font-size:12px;"></div>
+    <div class="modal-footer-actions">
+      <button class="ghost-btn" id="closeTemplateModalBtn">Close</button>
+      <button class="primary-btn btn-highlight" id="copyTemplateContentBtn">📋 Copy Formatted Text</button>
+      <button class="primary-btn" id="useInScannerBtn">⚡ Test in ATS Scanner →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Interactive Toast -->
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+SMART HIRE - READY FOR DEMO
+===========================
+
+1. Double-click Run_SmartHire.bat OR open index.html in Chrome/Edge.
+2. Demo sequence:
+   Dashboard -> Find Jobs -> search JavaScript -> filter -> View Details -> Save -> Apply -> Applications.
+3. Presentation PDF is inside presentation/.
+
+This is a front-end mini-project prototype with local sample job data; no database or server is required.
